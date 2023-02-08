@@ -34,8 +34,6 @@ def get_current_price():
 print(f'Time: {get_datetime()}\nXRP rate: $ {get_current_price()}')
 
 while True:
-    get_current_price()
-    get_datetime()
     history[count] = get_current_price()
 
     if max(history)/get_current_price() * 100 - 100 >= 1:
