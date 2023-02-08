@@ -9,12 +9,10 @@ def get_datetime():
     nice_print_time = str(current_time.strftime('%d-%m-%Y %H:%M'))
     return nice_print_time
 
-nice_print_time = get_datetime()
-
 # s = requests.get(f'https://api.binance.com/api/v3/ticker/price?symbol=XRPBUSD')
 # data = s.json()
 # current_price  = data['price']
-# print(f'Time: {nice_print_time}\nXRP rate: $ {current_price}')
+# print(f'Time: {get_datetime()}\nXRP rate: $ {current_price}')
     # API request (price less accurate)
 
 URL = 'https://www.binance.com/ru/price/xrp'
@@ -33,16 +31,15 @@ def get_current_price():
 
     return current_price
 
-current_price = get_current_price()
-
-print(f'Time: {nice_print_time}\nXRP rate: $ {current_price}')
+print(f'Time: {get_datetime()}\nXRP rate: $ {get_current_price()}')
 
 while True:
     get_current_price()
-    history[count] = current_price
+    get_datetime()
+    history[count] = get_current_price()
 
-    if max(history)/current_price * 100 - 100 >= 1:
-        print(f'Time: {nice_print_time}\nXRP rate: {current_price}')
+    if max(history)/get_current_price() * 100 - 100 >= 1:
+        print(f'Time: {get_datetime()}\nXRP rate: {get_current_price()}')
 
     count = (count + 1) % sec_in_hour
     time.sleep(1)
